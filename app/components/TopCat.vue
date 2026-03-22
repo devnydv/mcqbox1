@@ -16,23 +16,22 @@
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
+const { data } = await useFetch('/api/getcat')
+console.log(data.value)
 
 const categories = [
-  { label: '🌟 Home', path: '/' },
-  { label: '💻 Programming', path: '/category/programming' },
+  { label: '🌟 Home' , path: '/' },
   { label: '🧬 Science', path: '/category/science' },
   { label: '📐 Mathematics', path: '/category/mathematics' },
-  { label: '📚 Literature', path: '/category/literature' },
-  { label: '🌍 Geography', path: '/category/geography' },
-  { label: '🏛️ History', path: '/category/history' },
-  { label: '🎨 Art & Design', path: '/category/art-design' },
-  { label: '🎵 Music', path: '/category/music' },
-  { label: '🏋️ Sports', path: '/category/sports' },
-  { label: '🧠 General Knowledge', path: '/category/general-knowledge' },
-  { label: '⚗️ Chemistry', path: '/category/chemistry' },
+  
   { label: '🧑‍⚕️ Medicine', path: '/category/medicine' }
 ]
-
+console.log('Categories fetched from API:', data.value["data"])
+for (let i = 0; i < data.value["data"].length; i++) {
+  const cat = data.value["data"][i]
+  console.log('Processing category:', cat["names"])
+  categories.push({ label: cat.names, path: `/category/${cat["slug"]}` })
+}
 function isActive(path) {
   return route.path === path
 }

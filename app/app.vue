@@ -4,8 +4,16 @@
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-  
+    
+    
 </template>
+
+<script setup>
+
+
+</script>
+
+
 
 <style>
 :root {
