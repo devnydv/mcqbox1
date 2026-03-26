@@ -1,3 +1,7 @@
 <template>
-    lol
+    {{category}}
 </template>
+
+<script setup>
+const category = useRoute().params.subject
+</script>

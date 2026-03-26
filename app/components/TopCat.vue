@@ -21,15 +21,12 @@ console.log(data.value)
 
 const categories = [
   { label: '🌟 Home' , path: '/' },
-  { label: '🧬 Science', path: '/category/science' },
-  { label: '📐 Mathematics', path: '/category/mathematics' },
   
-  { label: '🧑‍⚕️ Medicine', path: '/category/medicine' }
 ]
 console.log('Categories fetched from API:', data.value["data"])
 for (let i = 0; i < data.value["data"].length; i++) {
   const cat = data.value["data"][i]
-  console.log('Processing category:', cat["names"])
+  //console.log('Processing category:', cat["names"])
   categories.push({ label: cat.names, path: `/category/${cat["slug"]}` })
 }
 function isActive(path) {
