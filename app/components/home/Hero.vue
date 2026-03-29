@@ -14,12 +14,12 @@
             <button class="hero-btn-primary">📖 Start Exploring Topics</button>
             <button class="hero-btn-secondary">🧩 Try a Quick Quiz →</button>
         </div>
-        <div class="hero-stats fade-up fade-up-4">
+        <!-- <div class="hero-stats fade-up fade-up-4">
             <div class="stat"><strong>50K+</strong><span>Questions</span></div>
             <div class="stat"><strong>200+</strong><span>Topics</span></div>
             <div class="stat"><strong>1.2M</strong><span>Learners</span></div>
             <div class="stat"><strong>No timers</strong><span>Ever</span></div>
-        </div>
+        </div> -->
     </section>
 
 </template>

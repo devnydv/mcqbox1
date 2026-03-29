@@ -3,7 +3,10 @@
     <NuxtRouteAnnouncer />
     <Hero />
     <main>
-        <LearnSec />
+        
+        <subcat />
+
+        <!-- <LearnSec /> -->
     </main>
 
 

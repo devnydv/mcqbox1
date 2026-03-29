@@ -6,13 +6,13 @@
             <span class="dot" style="background:var(--accent4);"></span>
             Start Here — Read Before You Quiz
           </div>
-          <div class="section-subtitle">Guides written to make things click, not just to test you</div>
+          <div class="section-subtitle">Trusted Learning Resources to make things click, not just to test you</div>
         </div>
         <a class="see-all" href="#">All guides →</a>
       </div>
       <div class="guides-grid">
 
-        <a href="#" class="guide-card">
+        <a href="https://www.musictheory.net/lessons" class="guide-card" target="_blank">
           <div class="guide-band" style="background:linear-gradient(90deg,#5b6af0,#3df0c8);"></div>
           <div class="guide-card-body">
             <div class="guide-card-icon-row">
