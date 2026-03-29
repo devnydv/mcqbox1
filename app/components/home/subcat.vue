@@ -34,7 +34,7 @@
           </div>
         </NuxtLink>
 
-        <a href="topic-detail.html" class="card">
+        <NuxtLink to="/category/ncert/books" class="card">
           <div class="card-img" style="background:linear-gradient(135deg,#1a1000,#3d2800,#6b4500);">
             <div class="card-img-text">📖</div>
           </div>
@@ -54,9 +54,9 @@
               <button class="card-btn-quiz">▶ Start Quiz</button>
             </div> -->
           </div>
-        </a>
+        </NuxtLink>
 
-        <a href="topic-detail.html" class="card">
+        <NuxtLink to="/category/ncert/books" class="card">
           <div class="card-img" style="background:linear-gradient(135deg,#001a0a,#003d1a,#00662b);">
             <div class="card-img-text">🎵</div>
           </div>
@@ -76,9 +76,9 @@
               <button class="card-btn-quiz">▶ Start Quiz</button>
             </div> -->
           </div>
-        </a>
+        </NuxtLink>
 
-        <a href="music-theory.html" class="card">
+        <NuxtLink to="/category/world-geography/books" class="card">
           <div class="card-img" style="background:linear-gradient(135deg,#2b1a00,#5c3600,#8b4513);">
             <div class="card-img-text">🌍</div>
           </div>
@@ -98,7 +98,7 @@
               <button class="card-btn-quiz">▶ Start Quiz</button>
             </div> -->
           </div>
-        </a>
+        </NuxtLink>
 
       </div>
     </div>
