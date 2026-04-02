@@ -4,16 +4,17 @@
         <div class="section-header-left">
           <div class="section-title">
             <span class="dot" style="background:var(--accent);"></span>
-            New? Start Gentle
+            Ncert Books
+            
           </div>
-          <div class="section-subtitle">Short, friendly quizzes — no pressure, just curiosity</div>
+          <div class="section-subtitle">Explore NCERT textbooks and resources</div>
         </div>
         <a class="see-all" href="#">See all →</a>
       </div>
       <div class="cards-grid">
 
         <NuxtLink to="/category/ncert/books" class="card">
-          <div class="card-img" style="background:linear-gradient(135deg,#1a1000,#3d2800,#6b4500);"">
+          <div class="card-img" style="background:linear-gradient(135deg,#1a1000,#3d2800,#6b4500);">
             <div class="card-img-text">🧠</div>
           </div>
           <div class="card-body">
@@ -102,4 +103,11 @@
 
       </div>
     </div>
+
+    {{ data.data }}
+    {{ data.data[0].title }}
 </template>
+<script setup>
+const {data}  = defineProps(['data'])
+
+</script>

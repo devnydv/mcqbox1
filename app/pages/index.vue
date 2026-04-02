@@ -4,8 +4,9 @@
     <Hero />
     <main>
         
-        <subcat />
-
+        <subcat :data = "data" />
+        <!-- <subcat />
+        <subcat /> -->
         <!-- <LearnSec /> -->
     </main>
 
@@ -30,5 +31,6 @@ main {
 }
 </style>
 <script setup>
+const  {data}  = await useFetch('/api/getsubcat')
 
 </script>

@@ -17,13 +17,13 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const { data } = await useFetch('/api/getcat')
-console.log(data.value)
+
 
 const categories = [
   { label: '🌟 Home' , path: '/' },
   
 ]
-console.log('Categories fetched from API:', data.value["data"])
+
 for (let i = 0; i < data.value["data"].length; i++) {
   const cat = data.value["data"][i]
   //console.log('Processing category:', cat["names"])
