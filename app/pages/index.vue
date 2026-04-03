@@ -3,12 +3,27 @@
     <NuxtRouteAnnouncer />
     <Hero />
     <main>
-        
-        <subcat :data = "data" />
+
+        <subcat :data="data" />
         <!-- <subcat />
         <subcat /> -->
         <!-- <LearnSec /> -->
+
+
+
+        <div v-for="(items, category) in groupedProducts" :key="category">
+        <div v-for="item in items" :key="item.id">
+            {{ item.names }}
+            <subcat :item="item" />
+            
+            
+        </div>
+        </div>
+
     </main>
+
+
+
 
 
 </template>
@@ -27,10 +42,25 @@ main {
     .section {
         margin-bottom: 2.5rem;
     }
-    .guides-grid { grid-template-columns: 1fr 1fr; }
+
+    .guides-grid {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 </style>
 <script setup>
-const  {data}  = await useFetch('/api/getsubcat')
+const { data } = await useFetch('/api/getsubcat')
+const groupedProducts = computed(() => {
+    if (!data.value) return {}
+
+    return data.value.data.reduce((acc, item) => {
+        if (!acc[item.category]) {
+            acc[item.category] = []
+        }
+
+        acc[item.category].push(item)
+        return acc
+    }, {})
+})
 
 </script>

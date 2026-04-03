@@ -104,8 +104,7 @@
       </div>
     </div>
 
-    {{ data.data }}
-    {{ data.data[0].title }}
+    
 </template>
 <script setup>
 const {data}  = defineProps(['data'])
