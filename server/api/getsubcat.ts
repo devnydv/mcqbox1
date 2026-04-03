@@ -3,8 +3,11 @@ export default defineEventHandler(async () => {
   const supabase = serverSupabase()
 
   const { data, error } = await supabase
-    .from('subcat')
-    .select('*')
+    .from('topic')
+    .select(`
+    *,
+    subcat (*)
+  `)
 
   if (error) {
     return { error: error.message }

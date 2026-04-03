@@ -1,5 +1,7 @@
 <template>
     <div class="section">
+
+
       <div class="section-header">
         <div class="section-header-left">
           <div class="section-title">
@@ -11,6 +13,7 @@
         </div>
         <a class="see-all" href="#">See all →</a>
       </div>
+
       <div class="cards-grid">
 
         <NuxtLink to="/category/ncert/books" class="card">

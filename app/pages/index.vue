@@ -12,9 +12,11 @@
 
 
         <div v-for="(items, category) in groupedProducts" :key="category">
-        <div v-for="item in items" :key="item.id">
-            {{ item.names }}
-            <subcat :item="item" />
+            
+            <div v-for="item in items" :key="item.id">
+                <h2>{{ item.subcat.names }}</h2>
+                <subcat :item="item" />
+                
             
             
         </div>
@@ -50,6 +52,7 @@ main {
 </style>
 <script setup>
 const { data } = await useFetch('/api/getsubcat')
+console.log(data.value)
 const groupedProducts = computed(() => {
     if (!data.value) return {}
 
