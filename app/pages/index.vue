@@ -4,22 +4,21 @@
     <Hero />
     <main>
 
-        <subcat :data="data" />
+        <!-- <subcat :data="data" /> -->
         <!-- <subcat />
         <subcat /> -->
         <!-- <LearnSec /> -->
 
 
+        <div class="section" v-for="([subcatName, items], index) in Object.entries(groupedProducts).slice(0, 4)"
+            :key="subcatName">
+            <subcatheader :subcat-name="subcatName" :data="items" />
+            <div class="cards-grid">
+                <div v-for="item in items.slice(0, 4)" :key="item.id">
+                    <subcat :item="item" />
+                </div>
+            </div>
 
-        <div v-for="(items, category) in groupedProducts" :key="category">
-            
-            <div v-for="item in items" :key="item.id">
-                <h2>{{ item.subcat.names }}</h2>
-                <subcat :item="item" />
-                
-            
-            
-        </div>
         </div>
 
     </main>
@@ -52,18 +51,36 @@ main {
 </style>
 <script setup>
 const { data } = await useFetch('/api/getsubcat')
-console.log(data.value)
+
 const groupedProducts = computed(() => {
     if (!data.value) return {}
 
     return data.value.data.reduce((acc, item) => {
-        if (!acc[item.category]) {
-            acc[item.category] = []
+        if (!acc[item.subcat.names]) {
+            acc[item.subcat.names] = []
         }
 
-        acc[item.category].push(item)
+        acc[item.subcat.names].push(item)
         return acc
     }, {})
 })
 
+
+// const { data } = await useFetch('/api/getsubcat')
+
+// const groupedBySlug = computed(() => {
+//   if (!data.value) return {}
+
+//   return data.value.data.reduce((acc, item) => {
+//     const slug = item.subcat?.slug || 'unknown'
+
+//     if (!acc[slug]) {
+//       acc[slug] = []
+//     }
+
+//     acc[slug].push(item)
+
+//     return acc
+//   }, {})
+// })
 </script>
