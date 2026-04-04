@@ -27,7 +27,7 @@ const categories = [
 for (let i = 0; i < data.value["data"].length; i++) {
   const cat = data.value["data"][i]
   //console.log('Processing category:', cat["names"])
-  categories.push({ label: cat.names, path: `/category/${cat["slug"]}` })
+  categories.push({ label: cat.names, path: `/${cat["slug"]}` })
 }
 function isActive(path) {
   return route.path === path

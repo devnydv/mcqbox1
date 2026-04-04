@@ -15,7 +15,7 @@
             <subcatheader :subcat-name="subcatName" :data="items" />
             <div class="cards-grid">
                 <div v-for="item in items.slice(0, 4)" :key="item.id">
-                    <subcat :item="item" />
+                    <subcatcard :item="item" />
                 </div>
             </div>
 

@@ -3,13 +3,10 @@
 
 
       
-<!-- <div v-for="(item, index) in data" :key="index">
-  {{ item }}
-  
-</div> -->
+
        
 
-        <NuxtLink to="/category/ncert/books" class="card">
+        <NuxtLink to="/ncert/books" class="card">
           <div class="card-img" style="background:linear-gradient(135deg,#1a1000,#3d2800,#6b4500);">
             <div class="card-img-text">🧠</div>
           </div>
