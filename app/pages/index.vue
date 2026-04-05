@@ -50,7 +50,7 @@ main {
 }
 </style>
 <script setup>
-const { data } = await useFetch('/api/getsubcat')
+const { data } = await useFetch('/api/gettopics')
 
 const groupedProducts = computed(() => {
     if (!data.value) return {}
