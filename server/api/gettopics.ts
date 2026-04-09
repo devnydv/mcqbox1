@@ -1,3 +1,5 @@
+// get topics and subcat for home page
+
 import { serverSupabase } from '../utils/supabase'
 export default defineEventHandler(async () => {
   const supabase = serverSupabase()

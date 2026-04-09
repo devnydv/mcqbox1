@@ -13,7 +13,7 @@
             <div class="card-title">{{item.names}}</div>
             <div class="card-desc">{{item.desc}}</div>
             <div class="card-meta" >
-              <span>📋 {{ item.count[0] }} Chapters</span>
+              <span>📋 {{ item.count[0] }} Topics</span>
               
               <span>⏱ {{ item.count[1] }} MCQs</span> 
             </div>
@@ -27,11 +27,7 @@
             </div> -->
           </div>
         </NuxtLink>
-
-         
-
   
-    
 
     
 </template>

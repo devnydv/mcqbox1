@@ -1,3 +1,5 @@
+//getting category list fo ths home page used in TopCat.vue
+
 import { createClient } from '@supabase/supabase-js'
 
 export default defineEventHandler(async () => {
