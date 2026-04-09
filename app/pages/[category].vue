@@ -3,8 +3,6 @@
     <catheader/>
     </section>
     <main>
-
-        
         <!-- <subcat />
         <subcat /> -->
         <!-- <LearnSec /> -->
@@ -32,7 +30,7 @@ const category = route.params.category
 
 const { data: topicdata, error } = await useFetch(`/api/getalldata/${category}`)
 
-console.log('Fetched grouped data:', topicdata.value)
+
 
 
 //const { groupedProducts } = await useFetch(`/api/getalldata`)
