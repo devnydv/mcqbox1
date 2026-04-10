@@ -5,7 +5,6 @@
             <!-- <h1 class="fade-up fade-up-1"> <em>Books</em></h1> -->
             <h1 class="fade-up fade-up-1">{{ items[0].subcat.names }}</h1>
             <p class="topic-hero-desc fade-up fade-up-2">{{ items[0].subcat.desc }}</p>
-
         </div>
     </section>
 

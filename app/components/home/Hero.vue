@@ -2,13 +2,12 @@
 <template>
 
     <section class="hero">
-        <div class="hero-badge fade-up"><span></span> A pressure-free learning space</div>
-        <h1 class="fade-up fade-up-1">
-            Learn it first.<br><em>Then test yourself.</em>
+        <div class="hero-badge fade-up"><span></span>Start Learning. Keep Practicing.</div>
+        <h1 class="fade-up fade-up-2" ">
+            Study with Purpose<br><em>Practice with Precision.</em>
         </h1>
         <p class="fade-up fade-up-2">
-            MCQbox is built for curious minds, not exam anxiety. Explore any topic at your own pace — read, understand,
-            then quiz yourself to see how much actually stuck.
+            Everything you need to learn and test yourself in one place—clear concepts, focused practice, real progress.
         </p>
         <div class="hero-ctas fade-up fade-up-3">
             <button class="hero-btn-primary">📖 Start Exploring Topics</button>
@@ -73,7 +72,7 @@
 
     .hero h1 {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(2.6rem, 6vw, 5rem);
+      font-size: clamp(2rem, 5vw, 4rem);
       font-weight: 800;
       line-height: 1.05;
       letter-spacing: -0.04em;
