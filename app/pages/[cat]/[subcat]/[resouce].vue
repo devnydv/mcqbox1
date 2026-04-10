@@ -7,10 +7,34 @@
             <p class="topic-hero-desc fade-up fade-up-2">{{ items[0].subcat.desc }}</p>
         </div>
     </section>
-    
+    <div class="page-layout">
+        <div class="content-area">
+            <div class="tab-bar">
+                <button class="tab-btn" :class="{ active: activeTab === 'resources' }" @click="activeTab = 'resources'">
+                    🌐 Resources
+                </button>
+
+                <button class="tab-btn" :class="{ active: activeTab === 'quiz' }" @click="activeTab = 'quiz'">
+                    🧩 Take the Quiz
+                </button>
+            </div>
+            <div class="tab-panel" :class="{ active: activeTab === 'resources' }" id="panel-resources">
+                <content />
+            </div>
+            <div class="tab-panel" :class="{ active: activeTab === 'quiz' }" id="panel-quiz">
+                <quizlist />
+            </div>
+        </div>
+        <asidediv />
+    </div>
+
+
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
+const activeTab = ref('resources')
 
 const route = useRoute()
 const category = route.params.cat
