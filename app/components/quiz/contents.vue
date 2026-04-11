@@ -35,7 +35,7 @@
           <a href="https://www.musicnotes.com/now/tips/music-theory-basics/" target="_blank" rel="noopener" class="resource-card">
             <div class="resource-card-icon" style="background:rgba(200,240,61,0.1)">🎹</div>
             <div class="resource-card-body">
-              <div class="resource-card-title">Music Theory Basics: Notes &amp; Staff</div>
+              <div class="resource-card-title">Music Theory Basics: Notes and Staff</div>
               <div class="resource-card-desc">Clear visual guide to reading notes on a staff, treble and bass clef, and time signatures. Perfect before the quiz.</div>
               <div class="resource-card-meta"><span class="resource-card-tag">Article</span><span class="resource-card-tag">~8 min</span><span class="resource-card-source">🔗 musicnotes.com</span></div>
             </div>
@@ -53,7 +53,7 @@
           <a href="https://www.teoria.com/" target="_blank" rel="noopener" class="resource-card">
             <div class="resource-card-icon" style="background:rgba(61,240,200,0.1)">🎧</div>
             <div class="resource-card-body">
-              <div class="resource-card-title">Teoria — Music Theory Exercises &amp; Tutorials</div>
+              <div class="resource-card-title">Teoria — Music Theory Exercises and Tutorials</div>
               <div class="resource-card-desc">Ear training, interval identification, and chord building exercises with audio. Excellent alongside theory knowledge.</div>
               <div class="resource-card-meta"><span class="resource-card-tag">Interactive</span><span class="resource-card-tag">Audio</span><span class="resource-card-source">🔗 teoria.com</span></div>
             </div>
