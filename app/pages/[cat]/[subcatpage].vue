@@ -1,10 +1,10 @@
 <template>
     <section class="topic-hero">
-        <div class="topic-hero-inner" v-for="(items, index) in topicdata" :key="index">
-            <div class="topic-tag fade-up"><span class="topic-tag-dot"></span> {{ items[0].category }}</div>
+        <div class="topic-hero-inner" v-for="(items, index) in subcatdata" :key="index">
+            <div class="topic-tag fade-up"><span class="topic-tag-dot"></span> {{ items.category }}</div>
             <!-- <h1 class="fade-up fade-up-1"> <em>Books</em></h1> -->
-            <h1 class="fade-up fade-up-1">{{ items[0].subcat.names }}</h1>
-            <p class="topic-hero-desc fade-up fade-up-2">{{ items[0].subcat.desc }}</p>
+            <h1 class="fade-up fade-up-1">{{ items.names }}</h1>
+            <p class="topic-hero-desc fade-up fade-up-2">{{ items.desc }}</p>
         </div>
     </section>
 
@@ -30,11 +30,13 @@
     </main>
 </template>
 <script setup>
+import { isTemplateExpression } from 'typescript'
+
 
 const route = useRoute()
 const category = route.params.cat
 const subcatpage = route.params.subcatpage
 
 const { data: topicdata, error } = await useFetch(`/api/getalldata/gettopic/${subcatpage}`)
-
+const { data: subcatdata } = await useFetch(`/api/v1/${category}/${subcatpage}`)
 </script>

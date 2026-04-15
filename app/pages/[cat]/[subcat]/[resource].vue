@@ -2,14 +2,14 @@
     <section class="topic-hero">
 
         <div class="topic-hero-inner" v-for="(items, index) in topicdata" :key="index">
-            <div v-if="items.slug === topic" >
+            
                 <div class="topic-tag fade-up">
                     <span class="topic-tag-dot"></span> {{ items.subcat }}
                 </div>
                 <!-- <h1 class="fade-up fade-up-1"> <em>Books</em></h1> -->
                 <h1 class="fade-up fade-up-1">{{ items.names }}</h1>
                 <p class="topic-hero-desc fade-up fade-up-2">{{ items.desc }}</p>
-            </div>
+            
         </div>
     </section>
     <div class="page-layout">
@@ -49,6 +49,6 @@ const topic = route.params.resource
 
 //const { data: content, error } = await useFetch(`/api/getalldata/getcontent/${topic}`)
 const { data: content, error } = await useFetch(`/api/getalldata/${cat}/${subcat}/${topic}`)
-const { data: topicdata } = await useFetch(`/api/${cat}/${subcat}`)
-console.log('Fetched topic data:', topicdata)
+const { data: topicdata } = await useFetch(`/api/v1/${cat}/${subcat}/${topic} `)
+
 </script>
