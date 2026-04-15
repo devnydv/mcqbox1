@@ -1,14 +1,17 @@
 <template>
-     <section class="topic-hero">
-        
-        <div class="topic-hero-inner" v-for="(items, index) in content" :key="index">
-            <div class="topic-tag fade-up"><span class="topic-tag-dot"></span> {{items[0].subcat}}</div>
-            <!-- <h1 class="fade-up fade-up-1"> <em>Books</em></h1> -->
-            <h1 class="fade-up fade-up-1">{{items[0].topic.names}}</h1>
-            <p class="topic-hero-desc fade-up fade-up-2">{{items[0].topic.desc}}</p>
+    <section class="topic-hero">
+
+        <div class="topic-hero-inner" v-for="(items, index) in topicdata" :key="index">
+            <div v-if="items.slug === topic" >
+                <div class="topic-tag fade-up">
+                    <span class="topic-tag-dot"></span> {{ items.subcat }}
+                </div>
+                <!-- <h1 class="fade-up fade-up-1"> <em>Books</em></h1> -->
+                <h1 class="fade-up fade-up-1">{{ items.names }}</h1>
+                <p class="topic-hero-desc fade-up fade-up-2">{{ items.desc }}</p>
+            </div>
         </div>
-        
-    </section> 
+    </section>
     <div class="page-layout">
         <div class="content-area">
             <div class="tab-bar">
@@ -21,7 +24,7 @@
                 </button>
             </div>
             <div class="tab-panel" :class="{ active: activeTab === 'resources' }" id="panel-resources">
-                <contents />
+                <contents :content="content" />
             </div>
             <div class="tab-panel" :class="{ active: activeTab === 'quiz' }" id="panel-quiz">
                 <quizlist />
@@ -40,7 +43,12 @@ const activeTab = ref('resources')
 
 const route = useRoute()
 
+const cat = route.params.cat
+const subcat = route.params.subcat
 const topic = route.params.resource
-console.log('Current topic:', topic)
-const { data: content, error } = await useFetch(`/api/getalldata/getcontent/${topic}`)
+
+//const { data: content, error } = await useFetch(`/api/getalldata/getcontent/${topic}`)
+const { data: content, error } = await useFetch(`/api/getalldata/${cat}/${subcat}/${topic}`)
+const { data: topicdata } = await useFetch(`/api/${cat}/${subcat}`)
+console.log('Fetched topic data:', topicdata)
 </script>
