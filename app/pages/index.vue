@@ -54,7 +54,7 @@ const { data } = await useFetch('/api/gettopics')
 
 const groupedProducts = computed(() => {
     if (!data.value) return {}
-
+    
     return data.value.data.reduce((acc, item) => {
         if (!acc[item.subcat.names]) {
             acc[item.subcat.names] = []

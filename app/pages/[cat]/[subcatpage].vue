@@ -17,7 +17,7 @@
 
         <div class="section" v-for="(items, index) in topicdata" :key="index">
             
-            <!-- <subcatheader :subcat-name="items[0].subcat.names" :data="items" /> -->
+            
 
             <div class="cards-grid">
                 <div v-for="item in items" :key="item.id">
