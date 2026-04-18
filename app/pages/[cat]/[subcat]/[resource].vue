@@ -1,6 +1,6 @@
 <template>
     <section class="topic-hero">
-{{ topicdata }}
+
         <div class="topic-hero-inner" v-for="(items, index) in topicdata" :key="index">
             
                 <div class="topic-tag fade-up">
