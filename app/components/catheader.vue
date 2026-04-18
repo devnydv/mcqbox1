@@ -24,7 +24,7 @@
 const route = useRoute()
 
 const { data } = await useFetch(`/api/getcat`)
-console.log('Fetched category data:', data.value)
+//console.log('Fetched category data:', data.value)
 const categories = computed(() => {
     return data.value.data?.find(
         item => item.slug === route.params.category
