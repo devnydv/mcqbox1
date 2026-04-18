@@ -1,6 +1,6 @@
 <template>
     <section class="topic-hero">
-
+{{ topicdata }}
         <div class="topic-hero-inner" v-for="(items, index) in topicdata" :key="index">
             
                 <div class="topic-tag fade-up">
@@ -48,7 +48,8 @@ const subcat = route.params.subcat
 const topic = route.params.resource
 
 //const { data: content, error } = await useFetch(`/api/getalldata/getcontent/${topic}`)
+const { data: topicdata } = await useFetch(`/api/v1/${cat}/${subcat}/${topic}`)
 const { data: content, error } = await useFetch(`/api/getalldata/${cat}/${subcat}/${topic}`)
-const { data: topicdata } = await useFetch(`/api/v1/${cat}/${subcat}/${topic} `)
-console.log(content, topicdata)
+
+
 </script>

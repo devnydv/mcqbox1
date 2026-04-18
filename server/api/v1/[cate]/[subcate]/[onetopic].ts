@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
   const subcat = event.context.params?.subcate
   const topic = event.context.params?.onetopic
 
-console.log(`Received request for category: ${cat}, subcategory: ${subcat}, topic: ${topic}`)
+//console.log(`Received request for category: ${cat}, subcategory: ${subcat}, topic: ${topic}`)
 
   const { data, error } = await supabase
     .from('topic')
