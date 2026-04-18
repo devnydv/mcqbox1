@@ -139,7 +139,7 @@
 
 <script setup>
 import { ref, computed, watchEffect } from 'vue'
-const { data } = await useFetch('/api/getalldata/ncert/class6/science/getallquiz')
+const { data } = await useFetch('/api/getallquestion/ncert/class6/science/getallquiz')
 
 //console.log('Fetched quiz data:', data.value)
 const questions = computed(() => data.value || [])
