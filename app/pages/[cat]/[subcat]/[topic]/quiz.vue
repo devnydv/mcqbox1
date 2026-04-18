@@ -139,11 +139,12 @@
 
 <script setup>
 import { ref, computed, watchEffect } from 'vue'
-const { data } = await useFetch('/api/getallquiz')
-console.log('Fetched quiz data:', data.value)
+const { data } = await useFetch('/api/getalldata/ncert/class6/science/getallquiz')
+
+//console.log('Fetched quiz data:', data.value)
 const questions = computed(() => data.value || [])
 // ── Demo Questions (source of truth for now) ───────────
-// const questions = ref([
+//  const questions = ref([
 //   {
 //     topic: "JavaScript Basics",
 //     text: "What will <code>typeof null</code> return?",
@@ -166,7 +167,7 @@ const questions = computed(() => data.value || [])
 //     correct: 0,
 //     explanation: "v-if is used for conditional rendering."
 //   }
-// ])
+//  ])
 
 // ── State ─────────────────────────────────────────────
 const currentIndex = ref(0)

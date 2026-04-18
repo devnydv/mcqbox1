@@ -5,10 +5,10 @@ import { serverSupabase } from '../../../../../utils/supabase'
 
 export default defineEventHandler(async (event) => {
   const supabase = serverSupabase()
-  // const cat = event.context.params?.cate
-  // const subcat = event.context.params?.subcate  
-  // const topic = event.context.params?.topic
-  // console.log("this is data:", topic)
+  const cat = event.context.params?.cate
+  const subcat = event.context.params?.subcate  
+  const topic = event.context.params?.topic
+  console.log("this is data:", topic)
 
   // const { data, error } = await supabase
   //   .from('content')
