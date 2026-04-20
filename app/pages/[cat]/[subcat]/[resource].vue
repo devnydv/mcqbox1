@@ -27,7 +27,7 @@
                 <contents :content="content" />
             </div>
             <div class="tab-panel" :class="{ active: activeTab === 'quiz' }" id="panel-quiz">
-                <quizlist />
+                <quizlist :quizlistdata="quizlistdata" />
             </div>
         </div>
         <asidediv />
@@ -50,6 +50,6 @@ const topic = route.params.resource
 //const { data: content, error } = await useFetch(`/api/getalldata/getcontent/${topic}`)
 const { data: topicdata } = await useFetch(`/api/v1/${cat}/${subcat}/${topic}`)
 const { data: content, error } = await useFetch(`/api/getalldata/${cat}/${subcat}/${topic}`)
-
+const { data: quizlistdata, quizerror } = await useFetch(`/api/getallquizlist/${cat}/${subcat}/${topic}/quizlist`)
 
 </script>

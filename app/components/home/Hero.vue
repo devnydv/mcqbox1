@@ -9,10 +9,10 @@
         <p class="fade-up fade-up-2">
             Everything you need to learn and test yourself in one place—clear concepts, focused practice, real progress.
         </p>
-        <div class="hero-ctas fade-up fade-up-3">
+        <!-- <div class="hero-ctas fade-up fade-up-3">
             <button class="hero-btn-primary">📖 Start Exploring Topics</button>
             <button class="hero-btn-secondary">🧩 Try a Quick Quiz →</button>
-        </div>
+        </div> -->
         <!-- <div class="hero-stats fade-up fade-up-4">
             <div class="stat"><strong>50K+</strong><span>Questions</span></div>
             <div class="stat"><strong>200+</strong><span>Topics</span></div>

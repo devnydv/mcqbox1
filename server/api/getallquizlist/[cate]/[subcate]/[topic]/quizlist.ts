@@ -1,42 +1,42 @@
 // get data of  content for a selected topic like chapter 1 class 6
 // using params to get data of content for a particular topic
 //used in the quiz page to get content of a particular topic
-import { serverSupabase } from '../../../../utils/supabase'
+import { serverSupabase } from '../../../../../utils/supabase'
 
 export default defineEventHandler(async (event) => {
   const supabase = serverSupabase()
   const cat = event.context.params?.cate
   const subcat = event.context.params?.subcate  
   const topic = event.context.params?.topic
-  
+
 
   const { data, error } = await supabase
-    .from('content')
+    .from('quizlist')
     .select('*')
     .eq("category", cat)
     .eq("subcat", subcat)
     .eq("topic", topic)
 
-  if (error) {
-    return { error: error.message }
-  }
+  // if (error) {
+  //   return { error: error.message }
+  // }
 
-  if (!data) return {}
+  // if (!data) return {}
 
-  type Topic = typeof data[number]
+  // type Topic = typeof data[number]
 
-  const grouped = data.reduce((acc: Record<string, Topic[]>, item) => {
-    const key = item.topic?.names || "uncategorized"
+  // const grouped = data.reduce((acc: Record<string, Topic[]>, item) => {
+  //   const key = item.topic || "uncategorized"
 
-    if (!acc[key]) {
-      acc[key] = []
-    }
+  //   if (!acc[key]) {
+  //     acc[key] = []
+  //   }
 
-    acc[key].push(item)
-    return acc
-  }, {})
+  //   acc[key].push(item)
+  //   return acc
+  // }, {})
 
   
-
-  return grouped
+  return data
+  //return grouped
 })
