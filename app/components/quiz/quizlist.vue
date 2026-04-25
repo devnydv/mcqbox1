@@ -11,27 +11,30 @@
 
     <div class="quiz-list-group">
         <!-- <div class="resource-group-label">🌱 Beginner</div> -->
+        <div v-for="quiz in quizlistdata" :key="quiz.id">
+{{ quiz.topic }}
 
-        <NuxtLink to="quiz" v-for="quiz in quizlistdata" :key="quiz.id" class="quiz-list-card">
-            <div class="quiz-list-icon" style="background:rgba(61,240,200,0.1);color:var(--music);">{{ quiz.emozi }}</div>
-            <div class="quiz-list-body">
-                <div class="quiz-list-title">{{ quiz.title }}</div>
-                <div class="quiz-list-desc">{{ quiz.desc }}</div>
-                <div class="quiz-list-meta">
-                    <span class="resource-card-tag">{{ quiz.category }}</span>
-                    <span class="resource-card-tag">{{quiz.subcat}}</span>
-                    <span class="resource-card-tag" style="color:var(--music);border-color:rgba(61,240,200,0.3);">🌱
-                        {{quiz.topic}}</span>
+            <NuxtLink :to="`/${quiz.category}/${quiz.subcat}/${quiz.topic}/quiz`" class="quiz-list-card">
+                <div class="quiz-list-icon" style="background:rgba(61,240,200,0.1);color:var(--music);">{{ quiz.emozi }}
                 </div>
-            </div>
-            <div class="quiz-list-cta">Start →</div>
-        </NuxtLink>
+                <div class="quiz-list-body">
+                    <div class="quiz-list-title">{{ quiz.title }}</div>
+                    <div class="quiz-list-desc">{{ quiz.desc }}</div>
+                    <div class="quiz-list-meta">
+                        <span class="resource-card-tag">{{ quiz.category }}</span>
+                        <span class="resource-card-tag">{{ quiz.subcat }}</span>
+                        <span class="resource-card-tag" style="color:var(--music);border-color:rgba(61,240,200,0.3);">🌱
+                            {{ quiz.topic }}</span>
+                    </div>
+                </div>
+                <div class="quiz-list-cta">Start →</div>
+            </NuxtLink>
+        </div>
 
-        
-        
+
     </div>
 
-    
+
 
     <!-- <div class="quiz-list-group">
         <div class="resource-group-label">🔥 Advanced</div>

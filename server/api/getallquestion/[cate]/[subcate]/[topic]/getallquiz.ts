@@ -8,17 +8,15 @@ export default defineEventHandler(async (event) => {
   const cat = event.context.params?.cate
   const subcat = event.context.params?.subcate  
   const topic = event.context.params?.topic
-  //console.log("this is data:", topic)
+  console.log("this is topic:", topic)
 
-  // const { data, error } = await supabase
-  //   .from('content')
-  //   .select('*')
-  //   .eq("category", cat)
-  //   .eq("subcat", subcat)
-  //   .eq("topic", topic)
+
 const { data, error } = await supabase
      .from('questions')
      .select('*')
+     .eq("category", cat)
+     .eq("subcat", subcat)
+     .eq("topic", topic)
   // if (error) {
   //   return { error: error.message }
   // }

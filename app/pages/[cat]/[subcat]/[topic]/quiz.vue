@@ -138,8 +138,12 @@
 </template>
 
 <script setup>
+const route = useRoute()
+const cat = route.params.cat
+const subcat = route.params.subcat
+const topic = route.params.topic
 import { ref, computed, watchEffect } from 'vue'
-const { data } = await useFetch('/api/getallquestion/ncert/class6/science/getallquiz')
+const { data } = await useFetch(`/api/getallquestion/${cat}/${subcat}/${topic}/getallquiz`)
 
 //console.log('Fetched quiz data:', data.value)
 const questions = computed(() => data.value || [])
