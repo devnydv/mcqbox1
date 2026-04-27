@@ -142,8 +142,10 @@ const route = useRoute()
 const cat = route.params.cat
 const subcat = route.params.subcat
 const topic = route.params.topic
+const id  = route.params.quiz
+console.log(id)
 import { ref, computed, watchEffect } from 'vue'
-const { data } = await useFetch(`/api/getallquestion/${cat}/${subcat}/${topic}/getallquiz`)
+const { data } = await useFetch(`/api/getallquestion/${cat}/${subcat}/${topic}/${id}`)
 
 //console.log('Fetched quiz data:', data.value)
 const questions = computed(() => data.value || [])

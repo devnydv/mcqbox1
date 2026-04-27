@@ -8,6 +8,7 @@ export default defineEventHandler(async (event) => {
   const cat = event.context.params?.cate
   const subcat = event.context.params?.subcate  
   const topic = event.context.params?.topic
+  const id = event.context.params?.getallquiz
   console.log("this is topic:", topic)
 
 
@@ -17,6 +18,7 @@ const { data, error } = await supabase
      .eq("category", cat)
      .eq("subcat", subcat)
      .eq("topic", topic)
+     .eq('quizlist', id)
   // if (error) {
   //   return { error: error.message }
   // }
@@ -36,7 +38,7 @@ const { data, error } = await supabase
   //   return acc
   // }, {})
 
-  console.log("this is data:", data)
+  //console.log("this is data:", data)
 
   return data
 })

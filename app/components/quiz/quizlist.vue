@@ -14,7 +14,7 @@
         <div v-for="quiz in quizlistdata" :key="quiz.id">
 {{ quiz.topic }}
 
-            <NuxtLink :to="`/${quiz.category}/${quiz.subcat}/${quiz.topic}/quiz`" class="quiz-list-card">
+            <NuxtLink :to="`/${quiz.category}/${quiz.subcat}/${quiz.topic}/${quiz.id}`" class="quiz-list-card">
                 <div class="quiz-list-icon" style="background:rgba(61,240,200,0.1);color:var(--music);">{{ quiz.emozi }}
                 </div>
                 <div class="quiz-list-body">
