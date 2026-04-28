@@ -7,7 +7,7 @@
 
         <NuxtLink :to="`/${item.category}/${item.subcat.slug}/${item.slug}/`" class="card">
           <div class="card-img" style="background:linear-gradient(135deg,#1a1000,#3d2800,#6b4500);">
-            <div class="card-img-text">{{item.emoji}}</div>
+            <div class="card-img-text">{{item.emozi}}</div>
           </div>
           <div class="card-body">
             <div class="card-title">{{item.names}}</div>

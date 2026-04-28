@@ -7,7 +7,8 @@
                     <span class="topic-tag-dot"></span> {{ items.subcat }}
                 </div>
                 <!-- <h1 class="fade-up fade-up-1"> <em>Books</em></h1> -->
-                <h1 class="fade-up fade-up-1">{{ items.names }}</h1>
+                 
+                <h1 class="fade-up fade-up-1"><span >{{ items.emozi }}</span> {{ items.names }}</h1>
                 <p class="topic-hero-desc fade-up fade-up-2">{{ items.desc }}</p>
             
         </div>
