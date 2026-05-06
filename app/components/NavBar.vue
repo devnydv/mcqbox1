@@ -5,18 +5,18 @@
     </a>
 
     <ul class="nav-links">
-      <li><a href="#">📖 Learn</a></li>
-      <li><a href="#">🧩 Quizzes</a></li>
+      <!-- <li><a href="#">📖 Learn</a></li>
+      <li><a href="#">🧩 Quizzes</a></li> -->
       <!-- <li><a href="#">🗺 My Path</a></li> -->
       <!-- <li><a href="#">🌐 Community</a></li> -->
     </ul>
 
     <div class="nav-right">
-      <button class="nav-login">Log In</button>
-      <button class="nav-cta">Start Learning Free</button>
+      <!-- <button class="nav-login">Log In</button>
+      <button class="nav-cta">Start Learning Free</button> -->
 
       <!-- hamburger -->
-      <button
+      <!-- <button
         class="nav-hamburger"
         id="hamburger"
         @click="toggleDrawer"
@@ -24,7 +24,7 @@
         :class="{ open: drawerOpen }"
       >
         <span></span><span></span><span></span>
-      </button>
+      </button> -->
     </div>
   </nav>
 
@@ -32,13 +32,13 @@
   <div class="nav-drawer" :class="{ open: drawerOpen }">
     <ul class="drawer-links">
       <li><a href="#" onclick="closeDrawer()">📖 &nbsp;Learn</a></li>
-      <li><a href="#" onclick="closeDrawer()">🧩 &nbsp;Quizzes</a></li>
+      <!-- <li><a href="#" onclick="closeDrawer()">🧩 &nbsp;Quizzes</a></li> -->
       <!-- <li><a href="#" onclick="closeDrawer()">🗺 &nbsp;My Path</a></li>
       <li><a href="#" onclick="closeDrawer()">🌐 &nbsp;Community</a></li> -->
     </ul>
     <div class="drawer-actions">
-      <button class="drawer-login" onclick="closeDrawer()">Log In</button>
-      <button class="drawer-cta" onclick="closeDrawer()">Start Learning Free →</button>
+      <!-- <button class="drawer-login" onclick="closeDrawer()">Log In</button> -->
+      <!-- <button class="drawer-cta" onclick="closeDrawer()">Start Learning Free →</button> -->
     </div>
   </div>
 </template>
