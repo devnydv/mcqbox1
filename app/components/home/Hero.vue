@@ -2,7 +2,7 @@
 <template>
 
     <section class="hero">
-        <div class="hero-badge fade-up"><span></span>Start Learning. Keep Practicing.</div>
+        <div class="hero-badge fade-up"><span></span>Start Learning and Practicing.</div>
         <h1 class="fade-up fade-up-2" ">
             Practice Your Way to <br><em>Success</em>
         </h1>

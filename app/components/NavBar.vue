@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <a href="#" class="nav-logo">
+    <a href="/" class="nav-logo">
       <span class="logo-box">MCQ</span>box
     </a>
 
