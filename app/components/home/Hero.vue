@@ -4,10 +4,10 @@
     <section class="hero">
         <div class="hero-badge fade-up"><span></span>Start Learning. Keep Practicing.</div>
         <h1 class="fade-up fade-up-2" ">
-            Study with Purpose<br><em>Practice with Precision.</em>
+            Practice Your Way to <br><em>Success</em>
         </h1>
         <p class="fade-up fade-up-2">
-            Everything you need to learn and test yourself in one place—clear concepts, focused practice, real progress.
+            Everything you need to learn and test yourself in one place—clear concepts, focused practice, and real progress.
         </p>
         <!-- <div class="hero-ctas fade-up fade-up-3">
             <button class="hero-btn-primary">📖 Start Exploring Topics</button>
