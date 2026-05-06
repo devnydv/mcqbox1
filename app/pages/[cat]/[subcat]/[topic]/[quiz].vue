@@ -1,7 +1,5 @@
 <template>
   <div class="mcq-quiz">
-
-    <!-- Header -->
     <div class="quiz-header">
       <span class="q-badge">
         Question <em>{{ currentIndex + 1 }}</em>
@@ -10,93 +8,74 @@
       <span class="q-topic">{{ currentQuestion.topic }}</span>
     </div>
 
-    <!-- Question Card -->
     <div :key="`q-${currentIndex}`" class="question-card">
-      
-      <!-- FIX: no self-closing -->
       <p class="question-text" v-html="currentQuestion.text"></p>
 
-      <!-- FIX: proper code tag -->
       <pre v-if="currentQuestion.code" class="code-block">
         <code v-html="currentQuestion.code"></code>
       </pre>
 
       <div class="options-list">
-        <button
-          v-for="(opt, i) in currentQuestion.options"
-          :key="i"
-          class="option-btn"
-          :class="optionClass(i)"
-          :disabled="isAnswered"
-          @click="selectOption(i)"
-        >
+        <button v-for="(opt, i) in currentQuestion.options" :key="i" class="option-btn" :class="optionClass(i)"
+          :disabled="isAnswered" @click="selectOption(i)">
           <span class="option-letter">{{ letters[i] }}</span>
           <span class="option-text">{{ opt }}</span>
         </button>
       </div>
     </div>
 
-    <!-- Explanation -->
     <Transition name="slide-down">
-      <div
-        v-if="isAnswered"
-        class="explanation"
-        :class="isCurrentCorrect ? 'exp-correct' : 'exp-wrong'"
-      >
+      <div v-if="isAnswered" class="explanation" :class="isCurrentCorrect ? 'exp-correct' : 'exp-wrong'">
         <span class="exp-icon">
           {{ isCurrentCorrect ? '✅' : '💡' }}
         </span>
         <div>
           <p class="exp-label">
-            {{ isCurrentCorrect
-              ? 'Correct!'
-              : `The correct answer is ${letters[currentQuestion.correct]}` }}
+            {{
+              isCurrentCorrect
+                ? 'Correct!'
+                : `The correct answer is ${letters[currentQuestion.correct]}`
+            }}
           </p>
           <p class="exp-text" v-html="currentQuestion.explanation"></p>
         </div>
       </div>
     </Transition>
 
-    <!-- Nav -->
     <div class="nav-row">
       <button class="btn-back" :disabled="currentIndex === 0" @click="goTo(currentIndex - 1)">
         ← Back
       </button>
 
-      <button v-if="!isAnswered && !isSkipped" class="btn-skip" @click="skipQuestion">
+       <button v-if="!isAnswered && !isSkipped" class="btn-skip" @click="skipQuestion">
         Skip
-      </button>
+      </button> 
 
-      <button v-if="isLastQuestion" class="btn-submit" @click="showResults = true">
+     <!-- <button v-if="isLastQuestion" class="btn-submit" @click="showResults = true">
         Submit →
+      </button> -->
+      <button class="btn-next" :disabled="!isAnswered && !isSkipped" @click="handleNext">
+        {{ isLastQuestion ? 'Submit →' : 'Next →' }}
       </button>
 
-      <button
-        v-else
-        class="btn-next"
-        :disabled="!isAnswered && !isSkipped"
-        @click="goTo(currentIndex + 1)"
-      >
+      <!-- <button v-else class="btn-next" :disabled="!isAnswered && !isSkipped" @click="goTo(currentIndex + 1)">
         Next →
-      </button>
+      </button> -->
     </div>
 
-    <!-- Result Overlay -->
     <Transition name="fade-up">
       <div v-if="showResults" class="overlay" @click.self="showResults = false">
         <div class="popup">
           <div class="popup-glow" />
-          <div class="popup-trophy">{{ trophyEmoji }}</div>
+          <!-- <div class="popup-trophy">{{ trophyEmoji }}</div> -->
 
-          <h2 class="popup-title" v-html="popupTitle"></h2>
-          <p class="popup-sub">{{ popupSub }}</p>
+          <!-- <h2 class="popup-title" v-html="popupTitle"></h2> -->
+          <h2 class="popup-title">Result</h2>
+          <!-- <p class="popup-sub">{{ popupSub }}</p> -->
 
-          <div class="result-bar">
-            <div
-              class="result-fill"
-              :style="{ width: scorePercent + '%', background: barColor }"
-            />
-          </div>
+          <!-- <div class="result-bar">
+            <div class="result-fill" :style="{ width: scorePercent + '%', background: barColor }" />
+          </div> -->
 
           <div class="popup-stats">
             <div class="stat">
@@ -113,15 +92,9 @@
             </div>
           </div>
 
-          <p class="popup-msg" v-html="popupMessage"></p>
+          <!-- <p class="popup-msg" v-html="popupMessage"></p> -->
 
           <div class="popup-actions">
-            <button
-              class="btn-save"
-              @click="saveResults"
-            >
-              📥 Save Results
-            </button>
             <button class="btn-retake" @click="retake">
               ↺ Try Again
             </button>
@@ -133,63 +106,45 @@
         </div>
       </div>
     </Transition>
-
   </div>
 </template>
 
 <script setup>
+import { ref, computed, watchEffect } from 'vue'
+
 const route = useRoute()
 const cat = route.params.cat
 const subcat = route.params.subcat
 const topic = route.params.topic
-const id  = route.params.quiz
-console.log(id)
-import { ref, computed, watchEffect } from 'vue'
-const { data } = await useFetch(`/api/getallquestion/${cat}/${subcat}/${topic}/${id}`)
+const id = route.params.quiz
 
-//console.log('Fetched quiz data:', data.value)
+const { data } = await useFetch(
+  `/api/getallquestion/${cat}/${subcat}/${topic}/${id}`
+)
+
 const questions = computed(() => data.value || [])
-// ── Demo Questions (source of truth for now) ───────────
-//  const questions = ref([
-//   {
-//     topic: "JavaScript Basics",
-//     text: "What will <code>typeof null</code> return?",
-//     options: ["null", "object", "undefined", "number"],
-//     correct: 1,
-//     explanation: "typeof null returns 'object'."
-//   },
-//   {
-//     topic: "Python",
-//     text: "What is the output of the following code?",
-//     code: "x = [1, 2, 3]\nprint(x * 2)",
-//     options: ["[2, 4, 6]", "[1, 2, 3, 1, 2, 3]", "Error", "[1, 1, 2, 2, 3, 3]"],
-//     correct: 1,
-//     explanation: "List multiplication repeats elements."
-//   },
-//   {
-//     topic: "Vue",
-//     text: "Which directive is used for conditional rendering?",
-//     options: ["v-if", "v-for", "v-bind", "v-model"],
-//     correct: 0,
-//     explanation: "v-if is used for conditional rendering."
-//   }
-//  ])
 
-// ── State ─────────────────────────────────────────────
 const currentIndex = ref(0)
 const answers = ref([])
 const showResults = ref(false)
 
 const letters = ['A', 'B', 'C', 'D']
 
-// ── Sync answers with questions ───────────────────────
 watchEffect(() => {
   if (questions.value.length) {
     answers.value = questions.value.map(() => null)
   }
 })
 
-// ── Computed ─────────────────────────────────────────
+function handleNext() {
+  if (isLastQuestion.value) {
+    showResults.value = true
+  } else {
+    goTo(currentIndex.value + 1)
+  }
+}
+
+
 const currentQuestion = computed(() => {
   return questions.value[currentIndex.value] || null
 })
@@ -213,14 +168,16 @@ const isLastQuestion = computed(() => {
 })
 
 const correctCount = computed(() => {
-  return answers.value.filter((a, i) =>
-    a !== null && a !== -1 && a === questions.value[i]?.correct
+  return answers.value.filter(
+    (a, i) =>
+      a !== null && a !== -1 && a === questions.value[i]?.correct
   ).length
 })
 
 const wrongCount = computed(() => {
-  return answers.value.filter((a, i) =>
-    a !== null && a !== -1 && a !== questions.value[i]?.correct
+  return answers.value.filter(
+    (a, i) =>
+      a !== null && a !== -1 && a !== questions.value[i]?.correct
   ).length
 })
 
@@ -230,10 +187,11 @@ const skippedCount = computed(() => {
 
 const scorePercent = computed(() => {
   const done = correctCount.value + wrongCount.value
-  return done > 0 ? Math.round((correctCount.value / done) * 100) : 0
+  return done > 0
+    ? Math.round((correctCount.value / done) * 100)
+    : 0
 })
 
-// ── Methods ──────────────────────────────────────────
 function optionClass(i) {
   const a = answers.value[currentIndex.value]
   if (a === null || a === -1) return ''
@@ -278,20 +236,20 @@ function retake() {
 
 /* ── Tokens ───────────────────────────────────────────── */
 .mcq-quiz {
-  --bg:             #0d0d0f;
-  --surface:        #16161a;
-  --surface2:       #1e1e24;
-  --border:         #2a2a35;
-  --accent:         #c8f03d;
-  --accent2:        #5b6af0;
-  --text:           #f0f0f5;
-  --muted:          #7a7a90;
-  --correct:        #3df0c8;
-  --correct-bg:     rgba(61,240,200,0.08);
-  --correct-border: rgba(61,240,200,0.35);
-  --wrong:          #f07a3d;
-  --wrong-bg:       rgba(240,122,61,0.08);
-  --wrong-border:   rgba(240,122,61,0.35);
+  --bg: #0d0d0f;
+  --surface: #16161a;
+  --surface2: #1e1e24;
+  --border: #2a2a35;
+  --accent: #c8f03d;
+  --accent2: #5b6af0;
+  --text: #f0f0f5;
+  --muted: #7a7a90;
+  --correct: #3df0c8;
+  --correct-bg: rgba(61, 240, 200, 0.08);
+  --correct-border: rgba(61, 240, 200, 0.35);
+  --wrong: #f07a3d;
+  --wrong-bg: rgba(240, 122, 61, 0.08);
+  --wrong-border: rgba(240, 122, 61, 0.35);
 
   font-family: 'DM Sans', sans-serif;
   background: var(--bg);
@@ -319,16 +277,24 @@ function retake() {
   letter-spacing: 0.1em;
   color: var(--muted);
 }
-.q-badge em { font-style: normal; color: var(--accent); font-size: 1rem; }
-.q-total    { opacity: 0.4; }
+
+.q-badge em {
+  font-style: normal;
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+.q-total {
+  opacity: 0.4;
+}
 
 .q-topic {
   padding: 0.25rem 0.75rem;
   border-radius: 100px;
   font-size: 0.72rem;
   font-weight: 600;
-  border: 1px solid rgba(91,106,240,0.3);
-  background: rgba(91,106,240,0.07);
+  border: 1px solid rgba(91, 106, 240, 0.3);
+  background: rgba(91, 106, 240, 0.07);
   color: var(--accent2);
 }
 
@@ -338,11 +304,19 @@ function retake() {
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 1.8rem;
-  animation: cardIn 0.3s cubic-bezier(0.4,0,0.2,1) both;
+  animation: cardIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
+
 @keyframes cardIn {
-  from { opacity:0; transform:translateY(10px); }
-  to   { opacity:1; transform:translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .question-text {
@@ -350,6 +324,7 @@ function retake() {
   line-height: 1.65;
   margin-bottom: 1.5rem;
 }
+
 .question-text :deep(code) {
   font-family: 'Courier New', monospace;
   background: var(--surface2);
@@ -398,12 +373,16 @@ function retake() {
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s, transform 0.12s;
 }
+
 .option-btn:hover:not(:disabled) {
-  border-color: rgba(200,240,61,0.35);
-  background: rgba(200,240,61,0.04);
+  border-color: rgba(200, 240, 61, 0.35);
+  background: rgba(200, 240, 61, 0.04);
   transform: translateX(3px);
 }
-.option-btn:disabled { cursor: default; }
+
+.option-btn:disabled {
+  cursor: default;
+}
 
 .option-letter {
   width: 26px;
@@ -425,13 +404,27 @@ function retake() {
 .opt-correct {
   border-color: var(--correct-border);
   background: var(--correct-bg);
-  animation: correctPop 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+  animation: correctPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
-.opt-correct .option-letter { background: var(--correct); border-color: var(--correct); color: #0d0d0f; }
+
+.opt-correct .option-letter {
+  background: var(--correct);
+  border-color: var(--correct);
+  color: #0d0d0f;
+}
+
 @keyframes correctPop {
-  0%   { transform:scale(1); }
-  50%  { transform:scale(1.02); }
-  100% { transform:scale(1); }
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.02);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 .opt-wrong {
@@ -439,13 +432,35 @@ function retake() {
   background: var(--wrong-bg);
   animation: wrongShake 0.35s ease both;
 }
-.opt-wrong .option-letter { background: var(--wrong); border-color: var(--wrong); color: #0d0d0f; }
+
+.opt-wrong .option-letter {
+  background: var(--wrong);
+  border-color: var(--wrong);
+  color: #0d0d0f;
+}
+
 @keyframes wrongShake {
-  0%,100% { transform:translateX(0); }
-  20%     { transform:translateX(-5px); }
-  40%     { transform:translateX(4px); }
-  60%     { transform:translateX(-3px); }
-  80%     { transform:translateX(2px); }
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-5px);
+  }
+
+  40% {
+    transform: translateX(4px);
+  }
+
+  60% {
+    transform: translateX(-3px);
+  }
+
+  80% {
+    transform: translateX(2px);
+  }
 }
 
 .opt-show-correct {
@@ -453,9 +468,16 @@ function retake() {
   background: var(--correct-bg);
   opacity: 0.75;
 }
-.opt-show-correct .option-letter { background: var(--correct); border-color: var(--correct); color: #0d0d0f; }
 
-.opt-dimmed { opacity: 0.32; }
+.opt-show-correct .option-letter {
+  background: var(--correct);
+  border-color: var(--correct);
+  color: #0d0d0f;
+}
+
+.opt-dimmed {
+  opacity: 0.32;
+}
 
 /* ── Explanation ──────────────────────────────────────── */
 .explanation {
@@ -465,10 +487,22 @@ function retake() {
   border-radius: 14px;
   border: 1px solid;
 }
-.exp-correct { background: rgba(61,240,200,0.05); border-color: rgba(61,240,200,0.2); }
-.exp-wrong   { background: rgba(240,122,61,0.05);  border-color: rgba(240,122,61,0.2); }
 
-.exp-icon  { font-size: 1.1rem; flex-shrink: 0; padding-top: 1px; }
+.exp-correct {
+  background: rgba(61, 240, 200, 0.05);
+  border-color: rgba(61, 240, 200, 0.2);
+}
+
+.exp-wrong {
+  background: rgba(240, 122, 61, 0.05);
+  border-color: rgba(240, 122, 61, 0.2);
+}
+
+.exp-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
 
 .exp-label {
   font-family: 'Syne', sans-serif;
@@ -476,14 +510,21 @@ function retake() {
   font-weight: 800;
   margin-bottom: 0.3rem;
 }
-.exp-correct .exp-label { color: var(--correct); }
-.exp-wrong   .exp-label { color: var(--wrong); }
+
+.exp-correct .exp-label {
+  color: var(--correct);
+}
+
+.exp-wrong .exp-label {
+  color: var(--wrong);
+}
 
 .exp-text {
   font-size: 0.84rem;
-  color: rgba(240,240,245,0.72);
+  color: rgba(240, 240, 245, 0.72);
   line-height: 1.6;
 }
+
 .exp-text :deep(code) {
   font-family: 'Courier New', monospace;
   background: var(--surface2);
@@ -494,11 +535,24 @@ function retake() {
   color: var(--accent);
 }
 
-.slide-down-enter-active { animation: slideDown 0.3s cubic-bezier(0.4,0,0.2,1) both; }
-.slide-down-leave-active { animation: slideDown 0.2s cubic-bezier(0.4,0,0.2,1) reverse both; }
+.slide-down-enter-active {
+  animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.slide-down-leave-active {
+  animation: slideDown 0.2s cubic-bezier(0.4, 0, 0.2, 1) reverse both;
+}
+
 @keyframes slideDown {
-  from { opacity:0; transform:translateY(-6px); }
-  to   { opacity:1; transform:translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ── Nav ──────────────────────────────────────────────── */
@@ -522,26 +576,47 @@ function retake() {
   cursor: pointer;
   transition: all 0.18s;
 }
-.btn-back:hover:not(:disabled) { border-color: var(--accent2); color: var(--accent2); }
+
+.btn-back:hover:not(:disabled) {
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+
 .btn-back:disabled,
-.btn-next:disabled { opacity: 0.3; cursor: not-allowed; }
+.btn-next:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
 
 .btn-next,
-.btn-submit { flex: 1; text-align: center; }
+.btn-submit {
+  flex: 1;
+  text-align: center;
+}
 
 .btn-next {
-  border-color: rgba(200,240,61,0.3);
-  background: rgba(200,240,61,0.06);
-  color: var(--accent);
-}
-.btn-next:hover:not(:disabled) {
-  background: rgba(200,240,61,0.12);
-  border-color: rgba(200,240,61,0.5);
+  border-color: rgba(200, 240, 61, 0.3);
+  background: rgba(200, 240, 61, 0.06);
   color: var(--accent);
 }
 
-.btn-submit { background: var(--accent); border-color: var(--accent); color: #0d0d0f; }
-.btn-submit:hover { opacity:0.88; transform:translateY(-1px); box-shadow:0 6px 20px rgba(200,240,61,0.25); }
+.btn-next:hover:not(:disabled) {
+  background: rgba(200, 240, 61, 0.12);
+  border-color: rgba(200, 240, 61, 0.5);
+  color: var(--accent);
+}
+
+.btn-submit {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0d0d0f;
+}
+
+.btn-submit:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(200, 240, 61, 0.25);
+}
 
 .btn-skip {
   background: transparent;
@@ -554,13 +629,16 @@ function retake() {
   white-space: nowrap;
   transition: color 0.15s;
 }
-.btn-skip:hover { color: var(--text); }
+
+.btn-skip:hover {
+  color: var(--text);
+}
 
 /* ── Result Overlay ───────────────────────────────────── */
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.75);
+  background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(8px);
   z-index: 300;
   display: flex;
@@ -588,11 +666,13 @@ function retake() {
 .popup-glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(200,240,61,0.15), transparent 70%);
+  background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(200, 240, 61, 0.15), transparent 70%);
   pointer-events: none;
 }
 
-.popup-trophy { font-size: 3rem; }
+.popup-trophy {
+  font-size: 3rem;
+}
 
 .popup-title {
   font-family: 'Syne', sans-serif;
@@ -600,9 +680,17 @@ function retake() {
   font-weight: 800;
   letter-spacing: -0.03em;
 }
-.popup-title :deep(em) { font-style: normal; color: var(--accent); }
 
-.popup-sub { font-size: 0.83rem; color: var(--muted); margin-bottom: 0.2rem; }
+.popup-title :deep(em) {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.popup-sub {
+  font-size: 0.83rem;
+  color: var(--muted);
+  margin-bottom: 0.2rem;
+}
 
 .result-bar {
   width: 100%;
@@ -611,29 +699,52 @@ function retake() {
   background: var(--surface2);
   overflow: hidden;
 }
+
 .result-fill {
   height: 100%;
   border-radius: 100px;
-  transition: width 1s 0.3s cubic-bezier(0.4,0,0.2,1);
+  transition: width 1s 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .popup-stats {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.5rem;
   width: 100%;
 }
+
 .stat {
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 0.8rem 0.5rem;
 }
-.stat strong { display:block; font-family:'Syne',sans-serif; font-size:1.3rem; font-weight:800; }
-.stat span   { font-size:0.65rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em; }
-.stat-correct { color: var(--correct); }
-.stat-wrong   { color: var(--wrong); }
-.stat-score   { color: var(--accent); }
+
+.stat strong {
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.stat span {
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-correct {
+  color: var(--correct);
+}
+
+.stat-wrong {
+  color: var(--wrong);
+}
+
+.stat-score {
+  color: var(--accent);
+}
 
 .popup-msg {
   font-size: 0.82rem;
@@ -645,9 +756,18 @@ function retake() {
   line-height: 1.55;
   width: 100%;
 }
-.popup-msg :deep(strong) { color: var(--text); }
 
-.popup-actions { display:flex; flex-direction:column; gap:0.5rem; width:100%; margin-top:0.2rem; }
+.popup-msg :deep(strong) {
+  color: var(--text);
+}
+
+.popup-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 0.2rem;
+}
 
 .btn-save {
   width: 100%;
@@ -662,7 +782,11 @@ function retake() {
   cursor: pointer;
   transition: all 0.18s;
 }
-.btn-save:hover { opacity:0.88; transform:translateY(-1px); }
+
+.btn-save:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
 
 .btn-retake {
   width: 100%;
@@ -677,7 +801,11 @@ function retake() {
   cursor: pointer;
   transition: all 0.18s;
 }
-.btn-retake:hover { border-color:var(--accent2); color:var(--accent2); }
+
+.btn-retake:hover {
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
 
 .btn-review {
   background: none;
@@ -688,17 +816,37 @@ function retake() {
   margin-top: 0.2rem;
   transition: color 0.15s;
 }
-.btn-review:hover { color: var(--text); }
 
-.fade-up-enter-active { transition: opacity 0.28s, transform 0.32s cubic-bezier(0.34,1.56,0.64,1); }
-.fade-up-leave-active { transition: opacity 0.2s, transform 0.2s ease; }
+.btn-review:hover {
+  color: var(--text);
+}
+
+.fade-up-enter-active {
+  transition: opacity 0.28s, transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.fade-up-leave-active {
+  transition: opacity 0.2s, transform 0.2s ease;
+}
+
 .fade-up-enter-from,
-.fade-up-leave-to     { opacity:0; transform:scale(0.96) translateY(14px); }
+.fade-up-leave-to {
+  opacity: 0;
+  transform: scale(0.96) translateY(14px);
+}
 
 /* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 560px) {
-  .mcq-quiz    { padding: 1rem; }
-  .question-card { padding: 1.3rem; }
-  .popup       { padding: 1.5rem 1.2rem; }
+  .mcq-quiz {
+    padding: 1rem;
+  }
+
+  .question-card {
+    padding: 1.3rem;
+  }
+
+  .popup {
+    padding: 1.5rem 1.2rem;
+  }
 }
 </style>
