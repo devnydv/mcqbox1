@@ -351,15 +351,7 @@ nav {
     background: rgba(91, 106, 240, 0.14)
 }
 
-.page-layout {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2.5rem 2rem 4rem;
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 2.5rem;
-    align-items: start
-}
+
 
 .tab-bar {
     display: flex;

@@ -31,7 +31,7 @@
                 <quizlist :quizlistdata="quizlistdata" />
             </div>
         </div>
-        <asidediv />
+        <!-- <asidediv /> -->
     </div>
 
 
