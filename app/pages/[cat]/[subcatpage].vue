@@ -39,4 +39,11 @@ const subcatpage = route.params.subcatpage
 
 const { data: topicdata, error } = await useFetch(`/api/getalldata/gettopic/${subcatpage}`)
 const { data: subcatdata } = await useFetch(`/api/v1/${category}/${subcatpage}`)
+const capitalsubcat = subcatpage.charAt(0).toUpperCase() + subcatpage.slice(1)
+useHead({
+    title: `Chose from ${capitalsubcat} - MCQBox`,
+    meta: [
+        { name: 'description', content: `Explore a variety of quizzes in the ${capitalsubcat} subcategory on MCQBox. Test your knowledge and learn with our engaging multiple choice questions.` }
+    ]
+})
 </script>

@@ -11,7 +11,10 @@ export default defineNuxtConfig({
   ssr: true,
   app: {
     head: {
-      title: 'MCQBox - Learn, and test your knowledge with multiple choice questions',
+      htmlAttrs: {
+      lang: 'en'
+    },
+      title: 'MCQBox - Learn and test your knowledge with multiple choice questions',
       meta: [
         { name: 'description', content: 'MCQBOX is a platform for creating and sharing multiple choice questions.' }
       ],
@@ -24,6 +27,7 @@ export default defineNuxtConfig({
         { rel: 'stylesheet', href: '/content.css' }
       ]
     }
+    
   },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
@@ -32,6 +36,7 @@ export default defineNuxtConfig({
     { path: '~/components', pathPrefix: false },
     { path: '~/components/home', pathPrefix: false },
     { path: '~/components/quiz', pathPrefix: false }
-  ] 
+  ]
+    
 
 })

@@ -29,8 +29,13 @@ const route = useRoute()
 const category = route.params.category
 
 const { data: topicdata, error } = await useFetch(`/api/getalldata/${category}`)
-
-
+const capitalcat = category.charAt(0).toUpperCase() + category.slice(1)
+useHead({
+    title: `Explore more of ${capitalcat} - MCQBox`,
+    meta: [
+        { name: 'description', content: `Explore a variety of quizzes in the ${capitalcat} category on MCQBox. Test your knowledge and learn with our engaging multiple choice questions.` }
+    ]
+})
 
 
 //const { groupedProducts } = await useFetch(`/api/getalldata`)

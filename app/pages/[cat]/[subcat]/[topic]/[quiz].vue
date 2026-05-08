@@ -229,6 +229,14 @@ function retake() {
   currentIndex.value = 0
   showResults.value = false
 }
+
+useHead
+({
+  title: `${currentQuestion.value ? currentQuestion.value.topic + ' Quiz' : 'Quiz'} - MCQBox`,
+  meta: [
+    { name: 'description', content: `Test your knowledge with this engaging quiz on ${currentQuestion.value ? currentQuestion.value.topic : 'various topics'} at MCQBox. Answer multiple choice questions and learn with detailed explanations.` }
+  ]
+})
 </script>
 
 <style scoped>
