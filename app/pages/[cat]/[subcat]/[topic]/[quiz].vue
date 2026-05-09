@@ -5,7 +5,7 @@
         Question <em>{{ currentIndex + 1 }}</em>
         <span class="q-total">/ {{ questions.length }}</span>
       </span>
-      <span class="q-topic">{{ currentQuestion.topic }}</span>
+      <span class="q-topic">{{ quizlistdata.title }}</span>
     </div>
 
     <div :key="`q-${currentIndex}`" class="question-card">
@@ -121,9 +121,11 @@ const id = route.params.quiz
 const { data } = await useFetch(
   `/api/getallquestion/${cat}/${subcat}/${topic}/${id}`
 )
-
+const { data: quizlistdata } = await useFetch(
+  `/api/getonequizlist/${id}`
+)
 const questions = computed(() => data.value || [])
-
+ console.log(quizlistdata.value)
 const currentIndex = ref(0)
 const answers = ref([])
 const showResults = ref(false)
@@ -234,7 +236,10 @@ useHead
 ({
   title: `${currentQuestion.value ? currentQuestion.value.topic + ' Quiz' : 'Quiz'} - MCQBox`,
   meta: [
-    { name: 'description', content: `Test your knowledge with this engaging quiz on ${currentQuestion.value ? currentQuestion.value.topic : 'various topics'} at MCQBox. Answer multiple choice questions and learn with detailed explanations.` }
+    { name: 'description', content: `Test your knowledge with this engaging quiz on ${currentQuestion.value ? currentQuestion.value.topic : 'various topics'} at MCQBox. Answer multiple choice questions and learn with detailed explanations.` },
+    { name: 'keywords', content: `MCQBox, quiz, ${currentQuestion.value ? currentQuestion.value.topic : 'topics'}, multiple choice questions, learning, testing, explanations, ${quizlistdata.value?.title || 'Quiz'}` },
+
+    
   ]
 })
 </script>

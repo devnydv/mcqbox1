@@ -56,7 +56,8 @@ const { data: quizlistdata, quizerror } = await useFetch(`/api/getallquizlist/${
 useHead({
     title: `${topicdata.value ? topicdata.value[0].names : 'Topic'} - MCQBox`,
     meta: [
-        { name: 'description', content: `Explore resources and take quizzes on ${topicdata.value ? topicdata.value[0].names : 'various topics'} at MCQBox. Learn with engaging content and test your knowledge with multiple choice questions.` }
+        { name: 'description', content: `Explore resources and take quizzes on ${topicdata.value ? topicdata.value[0].names : 'various topics'} at MCQBox. Learn with engaging content and test your knowledge with multiple choice questions.` },
+        { name: 'keywords', content: `MCQBox, ${topicdata.value ? topicdata.value[0].names : 'topics'}, resources, quizzes, learning, testing, multiple choice questions` }
     ]
 })
 </script>

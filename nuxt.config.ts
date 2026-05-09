@@ -16,7 +16,8 @@ export default defineNuxtConfig({
     },
       title: 'MCQBox - Learn and test your knowledge with multiple choice questions',
       meta: [
-        { name: 'description', content: 'MCQBOX is a platform for creating and sharing multiple choice questions.' }
+        { name: 'description', content: 'Learn and test your knowledge with multiple choice questions with MCQBox.' },
+        { name: 'keywords', content: 'MCQBox, multiple choice questions, quiz, learning, testing, ncert, programming' }
       ],
       link: [
         
