@@ -11,7 +11,7 @@
 
   <div class="resource-group" v-for="([items], index) in content" :key="index">
     
-    <NuxtLink :to="items.link" target="_blank" rel="noopener" class="resource-card">
+    <NuxtLink :to="items.link" target="_blank" rel="noopener" class="resource-card" :title="`Learn more about ${items.title}`">
       <div class="resource-card-icon" style="background:rgba(91,106,240,0.1)">{{ items.emoji }}</div>
       <div class="resource-card-body">
         <div class="resource-card-title">{{ items.title }}</div>

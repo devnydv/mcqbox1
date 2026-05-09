@@ -8,8 +8,9 @@
             </div>
             <div class="section-subtitle">{{ data[0].subcat.desc    }}</div>
         </div>
-        <NuxtLink class="see-all" :to="`/category/${data[0].category}/${data[0].subcat.slug}`">See all →</NuxtLink>
-        
+        <NuxtLink class="see-all" :to="`/category/${data[0].category}/${data[0].subcat.slug}`" :title="`See all quizzes in ${subcatName}`">
+            See all →
+        </NuxtLink>
     </div>
 </template>
 
