@@ -3,7 +3,7 @@
     <NuxtLink
       v-for="(category, index) in categories"
       :key="index"
-      :to="category.path"
+      :to="`${category.path}`"
       class="chip"
       :class="{ active: isActive(category.path) }"
     >
@@ -27,7 +27,7 @@ const categories = [
 for (let i = 0; i < data.value["data"].length; i++) {
   const cat = data.value["data"][i]
   //console.log('Processing category:', cat["names"])
-  categories.push({ label: cat.names, path: `/${cat["slug"]}` })
+  categories.push({ label: cat.names, path: `/category/${cat["slug"]}` })
 }
 function isActive(path) {
   return route.path === path
