@@ -17,7 +17,8 @@ export default defineNuxtConfig({
       title: 'MCQBox - Learn and test your knowledge with multiple choice questions',
       meta: [
         { name: 'description', content: 'Learn and test your knowledge with multiple choice questions with MCQBox.' },
-        { name: 'keywords', content: 'MCQBox, multiple choice questions, quiz, learning, testing, ncert, programming' }
+        { name: 'keywords', content: 'MCQBox, multiple choice questions, quiz, learning, testing, ncert, programming' },
+        { name: "google-site-verification", content: "S9zuhKZ5ZCNhilyGtlS3UQSzTYXavN0cth4a6F77cP8"}
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/icon.webp' },
