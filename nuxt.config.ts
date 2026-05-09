@@ -20,8 +20,6 @@ export default defineNuxtConfig({
         { name: 'keywords', content: 'MCQBox, multiple choice questions, quiz, learning, testing, ncert, programming' }
       ],
       link: [
-        
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         { rel: 'icon', type: 'image/x-icon', href: '/icon.webp' },
         { rel: 'stylesheet', href: '/home.css' },
         { rel: 'stylesheet', href: '/cate.css' },
