@@ -9,16 +9,16 @@
     </div>
   </div>
 
-  <div class="resource-group" v-for="([items], index) in content" :key="index">
+  <div class="resource-group" v-for="(items, index) in content" :key="index">
     
-    <NuxtLink :to="items.link" target="_blank" rel="noopener" class="resource-card" :title="`Learn more about ${items.title}`">
-      <div class="resource-card-icon" style="background:rgba(91,106,240,0.1)">{{ items.emoji }}</div>
+    <NuxtLink v-for="item in items" :to="item.link" target="_blank" rel="noopener" class="resource-card" :title="`Learn more about ${item.title}`">
+      <div class="resource-card-icon" style="background:rgba(91,106,240,0.1)">{{ item.emoji }}</div>
       <div class="resource-card-body">
-        <div class="resource-card-title">{{ items.title }}</div>
-        <div class="resource-card-desc">{{ items.desc }}</div>
+        <div class="resource-card-title">{{ item.title }}</div>
+        <div class="resource-card-desc">{{ item.desc }}</div>
         <div class="resource-card-meta">
-          <span class="resource-card-tag" v-for="chip in items.chip" :key="chip">{{ chip }}</span>
-          <!-- <span class="resource-card-tag">{{items.courceprice}}</span>
+          <span class="resource-card-tag" v-for="chip in item.chip" :key="chip">{{ chip }}</span>
+          <!-- <span class="resource-card-tag">{{item.courceprice}}</span>
                 <span class="resource-card-source">🔗 khanacademy.org</span> -->
         </div>
       </div>
